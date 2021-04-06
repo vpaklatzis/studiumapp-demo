@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Container, Menu } from 'semantic-ui-react';
 
-export default function NavBar() {
+export default function NavBar({setFormOpen}) {
     return (
         <Menu inverted fixed='top'>
             <Container>
@@ -10,7 +10,7 @@ export default function NavBar() {
                 </Menu.Item>
                 <Menu.Item name='Events' />
                 <Menu.Item>
-                    <Button inverted content='Create Event' style={{ borderRadius: '10px', backgroundColor: '#f9f9f9', color: '#FA696D', border: '2px solid #FA696D' }}/>
+                    <Button onClick={() => setFormOpen(true)} inverted content='Create Event' style={{ borderRadius: '10px', backgroundColor: '#f9f9f9', color: '#FA696D', border: '2px solid #FA696D' }}/>
                 </Menu.Item>
                 <Menu.Item position='right'>
                     <Button inverted content='Sign in' style={{ borderRadius: '10px', backgroundColor: '#f9f9f9', color: '#FA696D', border: '2px solid #FA696D' }}/>
