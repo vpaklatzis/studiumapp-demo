@@ -10,7 +10,7 @@ export default function NavBar({setFormOpen}) {
                 </Menu.Item>
                 <Menu.Item name='Events' />
                 <Menu.Item>
-                    <Button onClick={() => setFormOpen(true)} inverted content='Create Event' style={{ borderRadius: '10px', backgroundColor: '#f9f9f9', color: '#FA696D', border: '2px solid #FA696D' }}/>
+                    <Button onClick={() => setFormOpen(true)} inverted content='Create Event' style={{ borderRadius: '10px', backgroundColor: '#f9f9f9', color: '#FA696D', border: '1px solid #FA696D' }}/>
                 </Menu.Item>
                 <Menu.Item position='right'>
                     <Button inverted content='Sign in' style={{ borderRadius: '10px', backgroundColor: '#f9f9f9', color: '#FA696D', border: '2px solid #FA696D' }}/>
