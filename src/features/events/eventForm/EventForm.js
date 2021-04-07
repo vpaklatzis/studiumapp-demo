@@ -1,5 +1,6 @@
 import cuid from 'cuid';
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Form, Header, Segment } from 'semantic-ui-react';
 
 export default function EventForm({ setFormOpen, setEvents, createEvent, selectedEvent, updateEvent }) {
@@ -99,7 +100,8 @@ export default function EventForm({ setFormOpen, setEvents, createEvent, selecte
                     style={{ borderRadius: '10px', backgroundColor: '#FA696D', color: '#f9f9f9' }} 
                 />
                 <Button 
-                    onClick={() => setFormOpen(false)} 
+                    as={Link}
+                    to='/events'
                     type='submit' 
                     floated='right' 
                     content='Cancel' 
