@@ -7,7 +7,10 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
     "cuid": "^2.1.8",
+    "date-fns": "^2.19.0",
+    "formik": "^2.2.6",
     "react": "^17.0.2",
+    "react-datepicker": "^3.7.0",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
@@ -15,7 +18,8 @@
     "redux": "^4.0.5",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
-    "web-vitals": "^1.1.1"
+    "web-vitals": "^1.1.1",
+    "yup": "^0.32.9"
   },
   "scripts": {
     "start": "react-scripts start",
