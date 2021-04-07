@@ -22,6 +22,7 @@ export default function NavBar({setFormOpen}) {
                     <img src="/assets/Studium.png" alt="logo" style={{height: '30px', width: '140px'}} />
                 </Menu.Item>
                 <Menu.Item as={NavLink} to='/events' name='Events' style={{backgroundColor: '#FA696D'}}/>
+                <Menu.Item as={NavLink} to='/sandbox' name='Sandbox' style={{backgroundColor: '#FA696D'}}/>
                 { authenticated && 
                 <Menu.Item as={NavLink} to='/createEvent'>
                     <Button onClick={() => setFormOpen(true)} inverted content='Create Event' style={{ borderRadius: '10px', backgroundColor: '#f9f9f9', color: '#FA696D', border: '1px solid #FA696D' }}/>
