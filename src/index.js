@@ -10,11 +10,8 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { configureStore } from './app/store/configureStore';
 import ScrollToTop from './app/layout/ScrollToTop';
-import { loadEvents } from './features/events/eventActions';
 
 const store = configureStore();
-
-store.dispatch(loadEvents());
 
 ReactDOM.render(
   <React.StrictMode>
