@@ -11,7 +11,7 @@ export default function EventFilters() {
                 <Menu.Item content='Attending' />
                 <Menu.Item content='Hosting' />
             </Menu>
-            <Header icon='calendar' attached style={{color: '#FA696D'}} content='select date' />
+            <Header icon='calendar' attached style={{color: '#FA696D'}} content='Select Date' />
             <Calendar />
         </>
     )
