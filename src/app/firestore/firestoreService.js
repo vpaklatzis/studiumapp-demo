@@ -106,3 +106,26 @@ export async function updateUserProfilePhoto(downloadURL, filename) {
         throw(error);
     }
 }
+
+export function getUserPhotos(userUid) {
+    return db.collection('users').doc(userUid).collection('photos');
+}
+
+export async function setMainPhoto(photo) {
+    const user = firebase.auth().currentUser;
+    try {
+        await db.collection('users').doc(user.uid).update({
+            photoURL: photo.url
+        })
+        return await user.updateProfile({
+            photoURL: photo.url
+        })
+    } catch (error) {
+        throw error;
+    }
+}
+
+export function deletePhotoFromCollection(photoId) {
+    const userUid = firebase.auth().currentUser.uid;
+    return db.collection('users').doc(userUid).collection('photos').doc(photoId).delete();
+}
