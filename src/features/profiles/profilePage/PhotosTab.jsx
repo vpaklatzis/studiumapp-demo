@@ -50,7 +50,7 @@ export default function PhotosTab({ profile, isCurrentUser }) {
         <Tab.Pane loading={loading}>
             <Grid>
                 <Grid.Column width={16}>
-                    <Header floated='left' icon='user' content={`Photos`} />
+                    <Header floated='left' icon='photo' content={`Photos`} />
                     {isCurrentUser && (
                         <Button onClick={() => setEditMode(!editMode)} floated='right' content={editMode ? 'Cancel' : 'Change Photo'} />
                     )}

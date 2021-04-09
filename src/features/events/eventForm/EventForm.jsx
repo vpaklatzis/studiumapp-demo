@@ -84,16 +84,13 @@ export default function EventForm({ match, history }) {
             >
                 {({isSubmitting, dirty, isValid}) => (
                     <Form className='ui form'>
-                    <Header sub color='teal' content='Event Details' />
-                    <MyTextInput name='title' placeholder='Event title' />
-                    <MySelectInput name='category' placeholder='Event category' options={categoryData} />
+                    <Header style={{color: '#FA696D'}} content='Post Details' />
+                    <MyTextInput name='title' placeholder='Title' />
+                    <MySelectInput name='category' placeholder='Category' options={categoryData} />
                     <MyTextArea name='description' placeholder='Description' />
-                    <Header sub color='teal' content='Event Location Details' />
-                    <MyTextInput name='city' placeholder='City' />
-                    <MyTextInput name='venue' placeholder='Venue' />
                     <MyDateInput 
                         name='date' 
-                        placeholderText='Event date' 
+                        placeholderText='Date' 
                         timeformat='HH:mm'
                         showTimeselect
                         timeCaption='time'
