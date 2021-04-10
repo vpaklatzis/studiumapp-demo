@@ -25,8 +25,6 @@ export default function EventForm({ match, history }) {
         title: '',
         category: '',
         description: '',
-        city: '',
-        venue: '',
         date: ''
     };
 
@@ -36,8 +34,6 @@ export default function EventForm({ match, history }) {
         title: Yup.string().required('You must provide a title'),
         category: Yup.string().required('You must provide a category'),
         description: Yup.string().required(),
-        city: Yup.string().required(),
-        venue: Yup.string().required(),
         date: Yup.string().required()
     });
 

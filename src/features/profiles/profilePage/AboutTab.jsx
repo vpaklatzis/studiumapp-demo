@@ -15,7 +15,7 @@ export default function AboutTab({ profile, isCurrentUser }) {
                     {isCurrentUser && 
                         <Button onClick={() => setEditMode(!editMode)} floated='right' content={editMode ? 'Cancel' : 'Edit'} />
                     }
-                        </Grid.Column>
+                </Grid.Column>
                 <Grid.Column width={16}>
                     {editMode ? (
                        <ProfileForm profile={profile} /> 
