@@ -58,7 +58,7 @@ export default function EventForm({ match, history, location }) {
     useFirestoreDoc({
         shouldExecute: match.params.id !== selectedEvent?.id && location.pathname !== '/createEvent',
         query: () => listenToEventFromFirestore(match.params.id),
-        data: event => dispatch(listenToSelectedEvent(event)),
+        data: (event) => dispatch(listenToSelectedEvent(event)),
         deps: [match.params.id, dispatch]
     });
 
@@ -85,7 +85,7 @@ export default function EventForm({ match, history, location }) {
                     }
                 }}
             >
-                {({isSubmitting, dirty, isValid}) => (
+                {({isSubmitting, dirty, isValid, values}) => (
                     <Form className='ui form'>
                     <Header style={{color: '#FA696D'}} content='Post Details' />
                     <MyTextInput name='title' placeholder='Title' />

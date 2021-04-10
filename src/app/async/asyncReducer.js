@@ -52,7 +52,7 @@ export default function asyncReducer(state = initialState, {type, payload}) {
             return {
                 ...state,
                 initialized: true
-            }
+            };
         default: 
             return state;
     }

@@ -11,7 +11,7 @@ export default function EventFilters({ loading }) {
 
     return (
         <>
-            {authenticated && 
+            {authenticated && (
                 <Menu vertical size='large' style={{width: '100%'}}>
                     <Header icon='filter' attached style={{color: '#FA696D'}} content='Filters' />
                     <Menu.Item 
@@ -33,7 +33,7 @@ export default function EventFilters({ loading }) {
                         disabled={loading}
                     />
                 </Menu>
-            }
+            )}
             <Header icon='calendar' attached style={{color: '#FA696D'}} content='Select Date' />
             <Calendar 
                 onChange={(date) => dispatch(setStartDate(date))}

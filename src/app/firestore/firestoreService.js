@@ -28,12 +28,12 @@ export function fetchEventsFromFirestore(filter, startDate, limit, lastDocSnapsh
     switch (filter) {
         case 'isGoing':
             return eventsRef
-                .where('attendeeIds', 'array-contains', user.uid)
+                .where('attendeeIds', 'array-contains' , user.uid)
                 .where('date', '>=', startDate);
         case 'isHost':
             return eventsRef
-                .where('hostUid', '==', user.uid)
-                .where('date', '>=', startDate)
+                .where('hostUid', '==' , user.uid)
+                .where('date', '>=', startDate);
         default: 
             return eventsRef
                 .where('date', '>=', startDate);
@@ -151,7 +151,7 @@ export async function setMainPhoto(photo) {
                 })
             }
             batch.update(eventsQuerySnap.docs[i].ref, {
-                attendees: eventDoc.data().attendees.filter(attendee => {
+                attendees: eventDoc.data().attendees.filter((attendee) => {
                     if (attendee.id === user.uid) {
                         attendee.photoURL = photo.url
                     }
@@ -160,7 +160,7 @@ export async function setMainPhoto(photo) {
             })
         }
         const userFollowingSnap = await userFollowingRef.get();
-        userFollowingSnap.docs.forEach(docRef => {
+        userFollowingSnap.docs.forEach((docRef) => {
             let followingDocRef = db.collection('following').doc(docRef.id).collection('userFollowers').doc(user.uid);
             batch.update(followingDocRef, {
                 photoURL: photo.url
@@ -193,13 +193,14 @@ export function addUserAttendance(event) {
         attendeeIds: firebase.firestore.FieldValue.arrayUnion(user.uid)
     })
 }
+
 export async function cancelUserAttendance(event) {
     const user = firebase.auth().currentUser;
     try {
-        const eventDoc= await db.collection('events').doc(event.id).get();
+        const eventDoc = await db.collection('events').doc(event.id).get();
         return db.collection('events').doc(event.id).update({
             attendeeIds: firebase.firestore.FieldValue.arrayRemove(user.uid),
-            attendees: eventDoc.data().attendees.filter(attendee => attendee.id !== user.uid)
+            attendees: eventDoc.data().attendees.filter((attendee) => attendee.id !== user.uid)
         })
     } catch (error) {
         throw(error);
@@ -212,7 +213,7 @@ export function getUserEventsQuery(activeTab, userUid) {
     switch (activeTab) {
         case 1: //past posts
             return eventsRef
-                .where('attendeeIds', 'array-contains', userUid )
+                .where('attendeeIds', 'array-contains', userUid)
                 .where('date', '<=', today)
                 .orderBy('date', 'desc');
         case 2: //hosting

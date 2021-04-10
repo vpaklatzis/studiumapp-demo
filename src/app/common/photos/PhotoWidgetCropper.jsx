@@ -7,11 +7,11 @@ export default function PhotoWidgetCropper({setImage, imagePreview}) {
     const cropper = useRef(null);
 
     function cropImage() {
-        if (typeof cropper.current.getCroppedCanvas === 'undefined') {
+        if (typeof cropper.current.getCroppedCanvas() === 'undefined') {
             return;
         }
 
-        cropper.current.getCroppedCanvas.toBlob(blob => {
+        cropper.current.getCroppedCanvas().toBlob(blob => {
             setImage(blob);
         }, 'image/jpeg');
     }
@@ -22,7 +22,7 @@ export default function PhotoWidgetCropper({setImage, imagePreview}) {
         src={imagePreview}
         style={{ height: 200, width: "100%" }}
         // Cropper.js options
-        initialAspectRatio={1}
+        aspectRatio={1}
         preview=".img-preview"
         guides={false}
         viewMode={1}

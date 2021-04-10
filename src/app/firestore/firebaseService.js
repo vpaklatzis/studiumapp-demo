@@ -22,7 +22,7 @@ export async function registerInFirebase(creds) {
         await result.user.updateProfile({
             displayName: creds.displayName
         });
-        await setUserProfileData(result.user);
+        return await setUserProfileData(result.user);
     } catch (error) {
         throw error;
     }
@@ -61,7 +61,7 @@ export function uploadToFirebaseStorage(file, filename) {
     return storageRef.child(`${user.uid}/user_images/${filename}`).put(file);
 }
 
-export function deleteFromFiresbaseStorage(filename) {
+export function deleteFromFirebaseStorage(filename) {
     const userUid = firebase.auth().currentUser.uid;
     const storageRef = firebase.storage().ref();
     const photoRef = storageRef.child(`${userUid}/user_images/${filename}`);

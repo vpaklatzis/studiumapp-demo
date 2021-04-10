@@ -12,7 +12,7 @@ export default function EventFeedItem({post}) {
                     <Link to={`/profile/${post.userUid}`}>
                         {post.displayName}
                     </Link> is attending
-                    <Link to={/events/`${post.eventId}`}>{post.title}</Link>
+                    <Link to={`/events/${post.eventId}`}> {post.title}</Link>
                 </>
             );
             break;
@@ -22,7 +22,7 @@ export default function EventFeedItem({post}) {
                     <Link to={`/profile/${post.userUid}`}>
                         {post.displayName}
                     </Link> is not attending
-                    <Link to={/events/`${post.eventId}`}>{post.title}</Link>
+                    <Link to={`/events/${post.eventId}`}> {post.title}</Link>
                 </>
             );
                 break;

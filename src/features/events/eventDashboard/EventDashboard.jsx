@@ -34,12 +34,12 @@ export default function EventDashboard() {
     return (
         <Grid>
             <Grid.Column width={10}>
-                {loadingInitial && 
+                {loadingInitial && (
                     <>
                         <EventListItemPlaceholder />
                         <EventListItemPlaceholder />
                     </>
-                }
+                )}
                 <EventList events={events} getNextEvents={handleFetchNextEvents} loading={loading} moreEvents={moreEvents} />
             </Grid.Column>
             <Grid.Column width={6}>

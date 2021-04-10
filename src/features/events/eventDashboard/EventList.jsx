@@ -12,11 +12,11 @@ export default function EventList({ events, getNextEvents, loading, moreEvents }
                     hasMore={!loading && moreEvents}
                     initialLoad={false}
                 >
-                    {events.map((event) => (
-                <EventListItem 
-                    event={event} 
-                    key={event.id}
-                />
+                {events.map((event) => (
+                    <EventListItem 
+                        event={event} 
+                        key={event.id}
+                    />
             ))}
                 </InfiniteScroll>
             )} 

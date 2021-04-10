@@ -47,7 +47,7 @@ exports.removeFollowing = functions.firestore
     });
 
     exports.eventUpdated = functions.firestore
-        .document("events/${eventId}")
+        .document("events/{eventId}")
         .onUpdate(async (snapshot, context) => {
             const before = snapshot.before.data();
             const after = snapshot.after.data();
