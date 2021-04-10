@@ -5,7 +5,7 @@ import 'firebase/auth';
 import 'firebase/storage';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCZZO_rGtHANzFD31hgwFN8MFt5Pg5QTV0",
+    apiKey: process.env.REACT_APP_API_KEY,
     authDomain: "studiumappdemo.firebaseapp.com",
     projectId: "studiumappdemo",
     storageBucket: "studiumappdemo.appspot.com",
