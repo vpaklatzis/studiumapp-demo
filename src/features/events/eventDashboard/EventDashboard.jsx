@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Grid } from 'semantic-ui-react';
+import { Grid, Loader } from 'semantic-ui-react';
 import EventList from './EventList';
 import { useSelector, useDispatch } from 'react-redux';
 import EventListItemPlaceholder from './EventListItemPlaceholder';
 import EventFilters from './EventFilters';
-import { fetchEvents } from '../eventActions';
+import { clearEvents, fetchEvents } from '../eventActions';
 import EventsFeed from './EventsFeed';
 
 export default function EventDashboard() {
@@ -23,6 +23,8 @@ export default function EventDashboard() {
     );
 
     function handleSetPredicate(key, value) {
+        dispatch(clearEvents());
+        setLastDocSnapshot(null);
         setPredicate(new Map(predicate.set(key, value)));
     }
 
@@ -31,13 +33,16 @@ export default function EventDashboard() {
        dispatch(fetchEvents(predicate, limit)).then((lastVisible) => {
            setLastDocSnapshot(lastVisible);
            setLoadingInitial(false);
-       })
+       });
+       return () => {
+           dispatch(clearEvents());
+       }
    }, [dispatch, predicate]);
 
    function handleFetchNextEvents() {
        dispatch(fetchEvents(predicate, limit, lastDocSnapshot)).then((lastVisible) => {
            setLastDocSnapshot(lastVisible);
-       })
+       });
    }
 
     return (
@@ -49,20 +54,16 @@ export default function EventDashboard() {
                         <EventListItemPlaceholder />
                     </>
                 }
-                <EventList events={events} />
-                <Button 
-                    loading={loading}
-                    disabled={!moreEvents}
-                    onClick={handleFetchNextEvents}
-                    content='More'
-                    floated='right'
-                />
+                <EventList events={events} getNextEvents={handleFetchNextEvents} loading={loading} moreEvents={moreEvents} />
             </Grid.Column>
             <Grid.Column width={6}>
                 {authenticated && 
                     <EventsFeed />
                 }
                 <EventFilters predicate={predicate} setPredicate={handleSetPredicate} loading={loading} />
+            </Grid.Column>
+            <Grid.Column width={10}>
+                <Loader active={loading} />
             </Grid.Column>
         </Grid>
     );

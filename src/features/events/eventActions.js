@@ -1,6 +1,6 @@
 import { asyncActionError, asyncActionFinish, asyncActionStart } from "../../app/async/asyncReducer";
 import { dataFromSnapshot, fetchEventsFromFirestore } from "../../app/firestore/firestoreService";
-import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT, FETCH_EVENTS, LISTEN_TO_EVENT_CHAT } from "./eventConstants";
+import { CREATE_EVENT, UPDATE_EVENT, DELETE_EVENT, FETCH_EVENTS, LISTEN_TO_EVENT_CHAT, LISTEN_TO_SELECTED_EVENT, CLEAR_EVENTS } from "./eventConstants";
 
 export function fetchEvents({ predicate, limit, lastDocSnapshot }) {
     return async function(dispatch) {
@@ -19,37 +19,43 @@ export function fetchEvents({ predicate, limit, lastDocSnapshot }) {
     }
 }
 
-export function listenToEvents(events) {
+export function listenToSelectedEvent(event) {
     return {
-        type: FETCH_EVENTS,
-        payload: events
-    }
+        type: LISTEN_TO_SELECTED_EVENT,
+        payload: event
+    };
 }
 
 export function createEvent(event) {
     return {
         type: CREATE_EVENT,
         payload: event
-    }
+    };
 }
 
 export function updateEvent(event) {
     return {
         type: UPDATE_EVENT,
         payload: event
-    }
+    };
 }
 
 export function deleteEvent(eventId) {
     return {
         type: DELETE_EVENT,
         payload: eventId
-    }
+    };
 }
 
 export function listenToEventChat(comments) {
     return {
         type: LISTEN_TO_EVENT_CHAT,
         payload: comments
-    }
+    };
+}
+
+export function clearEvents() {
+    return {
+        type: CLEAR_EVENTS
+    };
 }
