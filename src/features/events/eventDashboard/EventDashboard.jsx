@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { Grid } from 'semantic-ui-react';
+import React, { useEffect, useState } from 'react';
+import { Button, Grid } from 'semantic-ui-react';
 import EventList from './EventList';
 import { useSelector, useDispatch } from 'react-redux';
 import EventListItemPlaceholder from './EventListItemPlaceholder';
 import EventFilters from './EventFilters';
-import { listenToEventsFromFirestore } from '../../../app/firestore/firestoreService';
-import { listenToEvents } from '../eventActions';
-import useFirestoreCollection from '../../../app/hooks/useFirestoreCollection';
+import { fetchEvents } from '../eventActions';
 import EventsFeed from './EventsFeed';
 
 export default function EventDashboard() {
-
+    const limit = 2;
     const dispatch = useDispatch();
-    const {events} = useSelector(state => state.event);
-    const {loading} = useSelector(state => state.async);
+    const { events, moreEvents } = useSelector((state) => state.event);
+    const {loading} = useSelector((state) => state.async);
     const {authenticated} = useSelector((state) => state.auth);
+    const [lastDocSnapshot, setLastDocSnapshot] = useState(null);
+    const [loadingInitial, setLoadingInitial] = useState(false);
     const [predicate, setPredicate] = useState(
         new Map([
             ['startDate', new Date()],
@@ -26,23 +26,37 @@ export default function EventDashboard() {
         setPredicate(new Map(predicate.set(key, value)));
     }
 
-    useFirestoreCollection({
-        query: () => listenToEventsFromFirestore(predicate),
-        data: events => dispatch(listenToEvents(events)),
-        deps: [dispatch, predicate]
-    }
-    );
+   useEffect(() => {
+       setLoadingInitial(true);
+       dispatch(fetchEvents(predicate, limit)).then((lastVisible) => {
+           setLastDocSnapshot(lastVisible);
+           setLoadingInitial(false);
+       })
+   }, [dispatch, predicate]);
+
+   function handleFetchNextEvents() {
+       dispatch(fetchEvents(predicate, limit, lastDocSnapshot)).then((lastVisible) => {
+           setLastDocSnapshot(lastVisible);
+       })
+   }
 
     return (
         <Grid>
             <Grid.Column width={10}>
-                {loading && 
+                {loadingInitial && 
                     <>
                         <EventListItemPlaceholder />
                         <EventListItemPlaceholder />
                     </>
                 }
                 <EventList events={events} />
+                <Button 
+                    loading={loading}
+                    disabled={!moreEvents}
+                    onClick={handleFetchNextEvents}
+                    content='More'
+                    floated='right'
+                />
             </Grid.Column>
             <Grid.Column width={6}>
                 {authenticated && 

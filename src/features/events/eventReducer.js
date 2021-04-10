@@ -2,7 +2,8 @@ import { CLEAR_COMMENTS, CREATE_EVENT, DELETE_EVENT, FETCH_EVENTS, LISTEN_TO_EVE
 
 const initialState = {
     events: [],
-    comments: []
+    comments: [],
+    moreEvents: false
 };
 
 export default function eventReducer(state = initialState, {type, payload}) {
@@ -25,7 +26,8 @@ export default function eventReducer(state = initialState, {type, payload}) {
         case FETCH_EVENTS:
             return {
                 ...state,
-                events: payload
+                events: [...state.events, ...payload.events],
+                moreEvents: payload.moreEvents
             }
         case LISTEN_TO_EVENT_CHAT:
             return {
