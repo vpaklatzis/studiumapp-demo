@@ -1,10 +1,13 @@
 import React from 'react';
 import { Header, Menu } from 'semantic-ui-react';
 import {Calendar} from 'react-calendar';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilter, setStartDate } from '../eventActions';
 
-export default function EventFilters({setPredicate, predicate, loading }) {
+export default function EventFilters({ loading }) {
+    const dispatch = useDispatch();
     const {authenticated} = useSelector((state) => state.auth);
+    const {filter, startDate} = useSelector((state) => state.event);
 
     return (
         <>
@@ -13,28 +16,28 @@ export default function EventFilters({setPredicate, predicate, loading }) {
                     <Header icon='filter' attached style={{color: '#FA696D'}} content='Filters' />
                     <Menu.Item 
                         content='All Posts'
-                        active={predicate.get('filter') === 'all'} 
-                        onClick={() => setPredicate('filter', 'all')}
+                        active={filter === 'all'} 
+                        onClick={() => dispatch(setFilter('all'))}
                         disabled={loading}
                     />
                     <Menu.Item 
                         content='Attending' 
-                        active={predicate.get('filter') === 'isGoing'} 
-                        onClick={() => setPredicate('filter', 'isGoing')}
+                        active={filter === 'isGoing'} 
+                        onClick={() => dispatch(setFilter('isGoing'))}
                         disabled={loading}
                     />
                     <Menu.Item 
                         content='Hosting' 
-                        active={predicate.get('filter') === 'isHost'} 
-                        onClick={() => setPredicate('filter', 'isHost')}
+                        active={filter === 'isHost'} 
+                        onClick={() => dispatch(setFilter('isHost'))}
                         disabled={loading}
                     />
                 </Menu>
             }
             <Header icon='calendar' attached style={{color: '#FA696D'}} content='Select Date' />
             <Calendar 
-                onChange={date => setPredicate('startDate', date)}
-                value={predicate.get('startDate') || new Date()}
+                onChange={(date) => dispatch(setStartDate(date))}
+                value={startDate || new Date()}
                 tileDisabled={() => loading}
             />
         </>
